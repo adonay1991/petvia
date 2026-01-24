@@ -1,0 +1,15 @@
+{
+  "extends": "@petvia/config/typescript/nextjs",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@petvia/ui": ["../../packages/ui/src"],
+      "@petvia/ui/*": ["../../packages/ui/src/*"],
+      "@petvia/db": ["../../packages/db/src"],
+      "@petvia/db/*": ["../../packages/db/src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

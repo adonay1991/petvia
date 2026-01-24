@@ -1,0 +1,40 @@
+{
+  "name": "petvia",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:types": "supabase gen types typescript --local > packages/db/src/types.ts",
+    "db:migration:new": "supabase migration new",
+    "db:push": "supabase db push",
+    "clean": "turbo clean && rm -rf node_modules"
+  },
+  "catalog": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "next": "^16.1.0",
+    "typescript": "^5.7.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "@supabase/ssr": "^0.8.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "lucide-react": "^0.469.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "catalog:"
+  },
+  "packageManager": "bun@1.2.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

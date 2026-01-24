@@ -1,0 +1,79 @@
+# Supabase Local Development Configuration
+# https://supabase.com/docs/guides/local-development
+
+project_id = "petvia-local"
+
+[api]
+enabled = true
+# Using high ports to avoid conflicts
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+# Using high ports to avoid conflicts
+port = 54322
+shadow_port = 54323
+major_version = 15
+
+[db.pooler]
+enabled = false
+port = 54324
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[studio]
+enabled = true
+# Using high port for Studio
+port = 54325
+api_url = "http://127.0.0.1"
+openai_api_key = "env(OPENAI_API_KEY)"
+
+[inbucket]
+enabled = true
+# Email testing ports
+port = 54326
+smtp_port = 54327
+pop3_port = 54328
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = ["https://127.0.0.1:3000"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = true
+
+[auth.sms]
+enable_signup = false
+enable_confirmations = false
+
+[auth.external.apple]
+enabled = false
+
+[auth.external.google]
+enabled = false
+
+[auth.external.github]
+enabled = false
+
+# IMPORTANT: Analytics disabled to reduce Docker resource usage
+[analytics]
+enabled = false
+
+[functions]
+verify_jwt = true

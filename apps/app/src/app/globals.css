@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@source "../../packages/ui/src/**/*.{ts,tsx}";
+
+@theme {
+  /* Colors - PetVia Brand */
+  --color-petvia-50: oklch(0.97 0.01 250);
+  --color-petvia-100: oklch(0.94 0.02 250);
+  --color-petvia-200: oklch(0.88 0.04 250);
+  --color-petvia-300: oklch(0.79 0.08 250);
+  --color-petvia-400: oklch(0.68 0.12 250);
+  --color-petvia-500: oklch(0.55 0.16 250);
+  --color-petvia-600: oklch(0.47 0.16 250);
+  --color-petvia-700: oklch(0.40 0.14 250);
+  --color-petvia-800: oklch(0.34 0.11 250);
+  --color-petvia-900: oklch(0.28 0.08 250);
+  --color-petvia-950: oklch(0.20 0.06 250);
+
+  /* Semantic Colors */
+  --color-background: oklch(0.99 0 0);
+  --color-foreground: oklch(0.15 0.02 250);
+  --color-muted: oklch(0.96 0.01 250);
+  --color-muted-foreground: oklch(0.45 0.02 250);
+  --color-border: oklch(0.90 0.01 250);
+  --color-input: oklch(0.90 0.01 250);
+  --color-ring: oklch(0.55 0.16 250);
+  --color-primary: oklch(0.55 0.16 250);
+  --color-primary-foreground: oklch(0.99 0 0);
+  --color-secondary: oklch(0.96 0.01 250);
+  --color-secondary-foreground: oklch(0.20 0.02 250);
+  --color-accent: oklch(0.96 0.01 250);
+  --color-accent-foreground: oklch(0.20 0.02 250);
+  --color-destructive: oklch(0.55 0.22 25);
+  --color-destructive-foreground: oklch(0.99 0 0);
+  --color-card: oklch(0.99 0 0);
+  --color-card-foreground: oklch(0.15 0.02 250);
+  --color-popover: oklch(0.99 0 0);
+  --color-popover-foreground: oklch(0.15 0.02 250);
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Font */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
