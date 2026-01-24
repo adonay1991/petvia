@@ -84,6 +84,61 @@ export async function findNearbyClinics(
   });
 }
 
+// Search nearby clinics with default radius of 10km
+export async function searchNearbyClinics(
+  supabase: SupabaseClient<Database>,
+  latitude: number,
+  longitude: number,
+  options?: {
+    radiusKm?: number;
+    emergencyOnly?: boolean;
+  }
+) {
+  const radiusKm = options?.radiusKm ?? 10;
+  const emergencyOnly = options?.emergencyOnly ?? false;
+
+  return supabase.rpc("find_nearby_clinics", {
+    lat: latitude,
+    lng: longitude,
+    radius_km: radiusKm,
+    emergency_only: emergencyOnly,
+  });
+}
+
+// Check if a clinic is currently open
+export async function getClinicOpenStatus(
+  supabase: SupabaseClient<Database>,
+  clinicId: string
+): Promise<boolean> {
+  const { data, error } = await supabase.rpc("is_clinic_open_now", {
+    clinic_id: clinicId,
+  });
+
+  if (error) {
+    console.error("Error checking clinic open status:", error);
+    return false;
+  }
+
+  return data ?? false;
+}
+
+// Get open status for multiple clinics
+export async function getClinicsOpenStatus(
+  supabase: SupabaseClient<Database>,
+  clinicIds: string[]
+): Promise<Record<string, boolean>> {
+  const results: Record<string, boolean> = {};
+
+  // Batch check - in production you'd want a single RPC for this
+  await Promise.all(
+    clinicIds.map(async (id) => {
+      results[id] = await getClinicOpenStatus(supabase, id);
+    })
+  );
+
+  return results;
+}
+
 export async function getEmergencyClinics(
   supabase: SupabaseClient<Database>,
   options?: {

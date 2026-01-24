@@ -222,7 +222,7 @@ END;
 $$;
 
 -- Check if clinic is currently open
-CREATE OR REPLACE FUNCTION is_clinic_open_now(p_clinic_id UUID)
+CREATE OR REPLACE FUNCTION is_clinic_open_now(clinic_id UUID)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
 AS $$
@@ -233,7 +233,7 @@ DECLARE
     v_is_open BOOLEAN;
 BEGIN
     -- Check if clinic is 24h
-    SELECT is_24h INTO v_is_24h FROM clinics WHERE id = p_clinic_id;
+    SELECT is_24h INTO v_is_24h FROM clinics WHERE id = clinic_id;
     IF v_is_24h THEN
         RETURN TRUE;
     END IF;
@@ -247,7 +247,7 @@ BEGIN
         NOT is_closed AND v_current_time >= opens_at AND v_current_time <= closes_at
     INTO v_is_open
     FROM clinic_opening_hours
-    WHERE clinic_id = p_clinic_id AND day_of_week = v_current_day;
+    WHERE clinic_opening_hours.clinic_id = is_clinic_open_now.clinic_id AND day_of_week = v_current_day;
 
     RETURN COALESCE(v_is_open, FALSE);
 END;
