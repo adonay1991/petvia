@@ -5,38 +5,38 @@ project_id = "petvia-local"
 
 [api]
 enabled = true
-# Using high ports to avoid conflicts
-port = 54321
+# Using unique ports to avoid conflicts with other Supabase projects
+port = 56321
 schemas = ["public", "graphql_public"]
 extra_search_path = ["public", "extensions"]
 max_rows = 1000
 
 [db]
-# Using high ports to avoid conflicts
-port = 54322
-shadow_port = 54323
+# Using unique ports to avoid conflicts
+port = 56322
+shadow_port = 56323
 major_version = 15
 
 [db.pooler]
 enabled = false
-port = 54324
+port = 56324
 pool_mode = "transaction"
 default_pool_size = 20
 max_client_conn = 100
 
 [studio]
 enabled = true
-# Using high port for Studio
-port = 54325
+# Using unique port for Studio
+port = 56325
 api_url = "http://127.0.0.1"
 openai_api_key = "env(OPENAI_API_KEY)"
 
 [inbucket]
 enabled = true
 # Email testing ports
-port = 54326
-smtp_port = 54327
-pop3_port = 54328
+port = 56326
+smtp_port = 56327
+pop3_port = 56328
 
 [storage]
 enabled = true
@@ -75,5 +75,6 @@ enabled = false
 [analytics]
 enabled = false
 
-[functions]
-verify_jwt = true
+# Edge Functions disabled (no functions defined yet)
+# [functions.my-function]
+# verify_jwt = true

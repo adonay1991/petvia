@@ -116,30 +116,30 @@ INSERT INTO clinics (
 -- ============================================
 -- Hospital 24h - Always open (but we add entries for display)
 INSERT INTO clinic_opening_hours (clinic_id, day_of_week, opens_at, closes_at, is_closed)
-SELECT id, day, '00:00', '23:59', FALSE
+SELECT id, day, '00:00'::TIME, '23:59'::TIME, FALSE
 FROM clinics, generate_series(0, 6) AS day
 WHERE slug = 'hospital-veterinario-24h-madrid';
 
 -- Clínica El Retiro - Standard hours
 INSERT INTO clinic_opening_hours (clinic_id, day_of_week, opens_at, closes_at, is_closed)
 SELECT id, day,
-    CASE WHEN day = 6 THEN '10:00' ELSE '09:00' END,
-    CASE WHEN day = 6 THEN '14:00' WHEN day = 5 THEN '20:00' ELSE '21:00' END,
+    CASE WHEN day = 6 THEN '10:00'::TIME ELSE '09:00'::TIME END,
+    CASE WHEN day = 6 THEN '14:00'::TIME WHEN day = 5 THEN '20:00'::TIME ELSE '21:00'::TIME END,
     day = 6 -- Closed on Sundays (day 6)
 FROM clinics, generate_series(0, 6) AS day
 WHERE slug = 'clinica-veterinaria-el-retiro';
 
 -- Centro Chamberí - Standard hours
 INSERT INTO clinic_opening_hours (clinic_id, day_of_week, opens_at, closes_at, is_closed)
-SELECT id, day, '10:00', '20:00', day IN (5, 6) -- Closed weekends
+SELECT id, day, '10:00'::TIME, '20:00'::TIME, day IN (5, 6) -- Closed weekends
 FROM clinics, generate_series(0, 6) AS day
 WHERE slug = 'centro-veterinario-chamberi';
 
 -- Urgencias Sur - Evenings and weekends
 INSERT INTO clinic_opening_hours (clinic_id, day_of_week, opens_at, closes_at, is_closed)
 SELECT id, day,
-    CASE WHEN day IN (5, 6) THEN '09:00' ELSE '18:00' END,
-    '02:00',
+    CASE WHEN day IN (5, 6) THEN '09:00'::TIME ELSE '18:00'::TIME END,
+    '02:00'::TIME,
     FALSE
 FROM clinics, generate_series(0, 6) AS day
 WHERE slug = 'urgencias-veterinarias-sur';
